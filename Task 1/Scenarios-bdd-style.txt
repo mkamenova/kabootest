@@ -1,7 +1,39 @@
-Scenario: 1-Check that the user opens the Freebies Vault and gets Token history
- Given user is on /home page
- When clicks FREEBIES VAULT
- Then YOUR HISTORY title is displayed
- And list with the latest 8 claimed and  tokens
+Scenario: 1-Check that the user opens the Freebies Vault from home page
+ Given user is logged in
+ And user is on /home page
+ When he clicks on FREEBIES VAULT
+ Then YOUR HISTORY section opens
+ And title YOUR HISTORY is displayed
+ And is displayed a list with maximum of 8 tokens - obtained and claimed
+ And the list is sorted chronologically starting from the latest tokens
+ And each token contains a Token thumbnail
+ And 
+	If a token has not been claimed 
+	Then a Replay button is displayed over the bottom right corner of the Token thumbnail
+	
+ 
+Scenario: 2-Check that the user opens the Freebies Vault when claiming a Token
+ Given user is logged in
+ And user is on /game page
+ And user has won a Token
+ When user clicks on CLAIM TOKEN
+ Then YOUR HISTORY section opens
+ And title YOUR HISTORY is displayed
+ And the claimed token is displayed first in the list tokens 
+ And the Token has a thumbnail and a Replay button
+ 
+ 
+Scenario: 3-Check that the obtained token is claimed
+ Given user is on /vault page
+ And user has won a Token that has not been claimed yet
+ When user clicks on Replay button
+ Then the token is claimed
+ And the Replay disappears
+
+ 
+Scenario: 4 -Check on hover information of Token
+ Given user is on /vault page
+ When user mouse over a token
+ Then is displayed a ribbon with game-slug text over the Token thumbnail
  
  
