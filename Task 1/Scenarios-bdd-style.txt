@@ -1,0 +1,7 @@
+Scenario: 1-Check that the user opens the Freebies Vault and gets Token history
+ Given user is on /home page
+ When clicks FREEBIES VAULT
+ Then YOUR HISTORY title is displayed
+ And list with the latest 8 claimed and  tokens
+ 
+ 
